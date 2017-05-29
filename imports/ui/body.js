@@ -33,6 +33,11 @@ Template.body.events({
         const lien = target.lien.value;
         const image = target.image.value;
 
+        if (target.titre.value == '') {
+            sAlert.error('Veuillez entrer un titre', {effect: 'genie', position: 'top-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
+            throw new Meteor.Error('Veuillez entrer un titre');
+        }
+
         // Insère une note dans la Collection mongo
         Meteor.call('notes.insert', titre, text, lien, image);
 
