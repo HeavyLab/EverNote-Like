@@ -38,6 +38,11 @@ Template.body.events({
             throw new Meteor.Error('Veuillez entrer un titre');
         }
 
+        if (! target.titre.value == '' && target.text.value == '' && target.lien.value == '' && target.image.value == '') {
+            sAlert.error('Veuillez ajouter au moins du texte, un lien ou une image', {effect: 'genie', position: 'top-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
+            throw new Meteor.Error('Veuillez ajouter au moins du texte, un lien ou une image');
+        }
+
         // Insère une note dans la Collection mongo
         Meteor.call('notes.insert', titre, text, lien, image);
 
