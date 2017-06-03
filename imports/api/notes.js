@@ -1,8 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+import { Search } from 'meteor/yasaricli:search';
 
 export const Notes = new Mongo.Collection('notes');
+
+const cursor = new Search(Notes, {
+  keys: ["titre"]
+});
+
+const test = cursor.search('');
 
 if (Meteor.isServer) {
     Meteor.publish('notes', function notesPublication() {
@@ -23,7 +30,8 @@ Meteor.methods({
             throw new Meteor.Error('not-authorized');
         }
 
-        Notes.insert({
+        Notes.insert(
+        {
             titre,
             text,
             lien,
@@ -35,7 +43,27 @@ Meteor.methods({
     },
     'notes.remove'(noteId) {
         check(noteId, String);
-
         Notes.remove(noteId);
+    },
+
+    'notes.update'(noteId, titre, text, lien, image) {
+        check(noteId, String);
+        check(titre, String);
+        check(text, String);
+        check(lien, String);
+        check(image, String);
+
+        if (! Meteor.userId()) {
+            throw new Meteor.Error('not-authorized');
+        }
+
+        Notes.update(
+            {'_id': noteId},
+            {$set:
+                {'titre':titre,
+                'text':text,
+                'lien':lien,
+                'image':image}
+        });
     },
 });
