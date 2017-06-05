@@ -3,13 +3,13 @@ import { Template } from 'meteor/templating';
 
 import './note.html';
 
-Template.note.helpers({
+Template.Note.helpers({
     isOwner() {
         return this.owner === Meteor.userId();
     },
 });
 
-Template.note.events({
+Template.Note.events({
     'click .delete'() {
         Meteor.call('notes.remove', this._id);
     },

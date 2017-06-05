@@ -1,77 +1,168 @@
-<body>
-    <div id="wrapper">
+<template name="Body">
         <div id="page-content-wrapper">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1>EverNote-Like</h1>
-                        {{> loginButtons}}
-                        {{> sAlert}}
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <br />
-                    {{#if currentUser}}
-                        <div>
-                            <a href="#collapse" class="btn btn-info" data-toggle="collapse" aria-expanded="false">Ajouter une note</a>
-                            <div id="collapse" class="collapse">
-                                <form class="new-note form-horizontal">
-
-                                    <div class="form-group">
-                                        <label for="titre" class="col-sm-2 control-label">Titre</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="text" name="titre" id="titre" placeholder="Titre">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="texte" class="col-sm-2 control-label">Texte</label>
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control" style="resize:none;" type="text" name="text" id="text" placeholder="Texte" rows="3"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="lien" class="col-sm-2 control-label">Lien</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="text" name="lien" id="lien" placeholder="Lien">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="image" class="col-sm-2 control-label">Image</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" type="text" name="image" id="image" placeholder="Lien vers l'image">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                              <button type="submit" class="btn btn-default">Ajouter</button>
-                                          </div>
-                                      </div>
-                                </form>
-                            </div>
-                        </div>
-                    {{/if}}
-                <br />
-                <br />
                 {{#if currentUser}}
-                <div class="panel panel-default">
-                    <div class="panel-heading"><h3>Mes notes</h3></div>
-                    <div class="panel-body">
+                <div class="page-header clearfix">
+                  <h3 class="pull-left">Mes notes</h3>
+                </div>
                         <div class="panel-group" id="accordion">
                             {{#each notes}}
-                                {{> note}}
+                                {{> Note}}
+                            {{else}}
+                                <p class="alert alert-warning">Vous n'avez pas encore enregistré de note.</p>
                             {{/each}}
                         </div>
-                    </div>
-                </div>
                 {{else}}
                     <h1>Veuillez vous connecter pour voir/enregistrer des notes</h1>
                 {{/if}}
             </div>
         </div>
+</template>
+
+<template name="Sidebar">
+  {{#if currentUser}}
+  <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/">
+                        EverNote-Like
+                    </a>
+                </li>
+                <li>
+                  {{> loginButtons}}
+                  {{> sAlert}}
+                </li>
+                <li>
+                    <a href="/">Mes notes</a>
+                </li>
+                <li>
+                    <a href="/add">Ajouter une note</a>
+                </li>
+                <li>
+                    <a href="/search">Rechercher une note</a>
+                </li>
+            </ul>
+      </div>
+  {{else}}
+  <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="/">
+                    EverNote-Like
+                </a>
+            </li>
+            <li>
+              {{> loginButtons}}
+              {{> sAlert}}
+            </li>
+        </ul>
+  </div>
+  {{/if}}
+</template>
+
+<template name="Add">
+  {{#if currentUser}}
+  <div id="page-content-wrapper">
+  <div class="container">
+    <div class="page-header clearfix">
+      <h3 class="pull-left">Ajouter une note</h3>
     </div>
-</body>
+              <form class="new-note form-horizontal">
+
+                  <div class="form-group">
+                      <label for="titre" class="col-sm-2 control-label">Titre</label>
+                      <div class="col-sm-10">
+                          <input class="form-control" type="text" name="titre" id="titre" placeholder="Titre">
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="texte" class="col-sm-2 control-label">Texte</label>
+                      <div class="col-sm-10">
+                          <textarea class="form-control" style="resize:none;" type="text" name="text" id="text" placeholder="Texte" rows="3"></textarea>
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="lien" class="col-sm-2 control-label">Lien</label>
+                      <div class="col-sm-10">
+                          <input class="form-control" type="text" name="lien" id="lien" placeholder="Lien">
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="image" class="col-sm-2 control-label">Image</label>
+                      <div class="col-sm-10">
+                          <input class="form-control" type="text" name="image" id="image" placeholder="Lien vers l'image">
+                      </div>
+                  </div>
+
+                  <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">Ajouter</button>
+                        </div>
+                    </div>
+              </form>
+    </div>
+    </div>
+  {{else}}
+      <div id="page-content-wrapper">
+          <div class="container">
+              <h1>Veuillez vous connecter pour voir/enregistrer des notes</h1>
+          </div>
+      </div>
+  {{/if}}
+</template>
+
+<template name="Search">
+    {{#if currentUser}}
+  <div id="page-content-wrapper">
+  <div class="container">
+  <div class="page-header clearfix">
+    <h3 class="pull-left">Rechercher une note</h3>
+    <div class="pull-right">
+      <form class="form-inline recherche">
+        <div class="form-group">
+          <label for="recherche">Type de recherche:</label>
+          <select class="form-control" id="recherche">
+            <option>Titre</option>
+            <option>Contenu</option>
+            <option>Hashtag</option>
+            <option>Date: création</option>
+            <option>Date: avant</option>
+            <option>Date: après</option>
+            <option>Date: entre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="text" name="search" id="search" class="form-control" width="250px" placeholder="Chercher une note...">
+        </div>
+      </form>
+    </div>
+    <!-- <div class="pull-right">
+      <input type="text" name="search" id="search" class="form-control" width="250px" placeholder="Chercher une note...">
+    </div> -->
+  </div>
+
+  <ul class="list-group">
+    <div class="panel-group" id="accordion">
+      {{#each notes}}
+        <!-- <li class="list-group-item clearfix">
+          <span class="pull-left">{{titre}}</span>
+        </li> -->
+        {{> Note}}
+      {{else}}
+        <p class="alert alert-warning">Nous n'avons rien trouvé pour {{query}}. Désolé.</p>
+      {{/each}}
+    </div>
+  </ul>
+</div>
+</div>
+{{else}}
+    <div id="page-content-wrapper">
+        <div class="container">
+            <h1>Veuillez vous connecter pour voir/enregistrer des notes</h1>
+        </div>
+    </div>
+{{/if}}
+</template>

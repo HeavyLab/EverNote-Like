@@ -1,21 +1,22 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
-import { Search } from 'meteor/yasaricli:search';
 
 export const Notes = new Mongo.Collection('notes');
 
-const cursor = new Search(Notes, {
-  keys: ["titre"]
-});
-
-const test = cursor.search('');
-
 if (Meteor.isServer) {
+    Notes._ensureIndex( { titre: 1, text: 1, lien: 1, image: 1} );
+
     Meteor.publish('notes', function notesPublication() {
         return Notes.find({
             owner: this.userId,
         });
+    });
+
+    Meteor.publish('search', function(searchValue){
+      if(!searchValue) {
+        return Notes.find({});
+      }
     });
 }
 

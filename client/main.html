@@ -1,3 +1,13 @@
 <head>
   <title>EverNote-like</title>
 </head>
+
+<template name="ApplicationLayout">
+  <body>
+    <div id="wrapper">
+        {{> yield "sidebar"}}
+
+        {{> yield "body"}}
+    </div>
+  </body>
+</template>

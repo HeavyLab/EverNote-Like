@@ -1,9 +1,8 @@
-<template name="note">
+<template name="Note">
   <div class="panel panel-default">
       <div class="panel-heading" style="overflow:hidden">
           <div class="btn-group btn-group-sm pull-right">
               <button href="#collapse{{_id}}edit" class="edit btn btn-default" data-toggle="collapse" aria-expanded="false"><span class="glyphicon glyphicon-pencil"></span></button>
-              <!-- <button href="#collapse2" class="edit btn btn-default" data-toggle="collapse" aria-expanded="false"><span class="glyphicon glyphicon-pencil"></span></button> -->
               <button class="delete btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
           </div>
           <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse{{_id}}">{{titre}}</a></h4>
@@ -51,13 +50,6 @@
                     </div>
               </form>
           </div>
-          <!-- <div class="panel-body">
-              {{text}} <br /><br />
-              <a href="{{lien}}">{{lien}}</a> <br  /><br />
-              <a href="#" class="thumbnail">
-                  <img src="{{image}}" alt="{{image}}" />
-              </a>
-          </div> -->
       </div>
   </div>
 </template>
