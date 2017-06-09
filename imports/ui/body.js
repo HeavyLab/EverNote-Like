@@ -28,6 +28,7 @@ Template.Body.events({
 
         const titre = target.titre.value;
         const text = target.text.value;
+        const descriptionLien = target.descriptionLien.value;
         const lien = target.lien.value;
         const image = target.image.value;
         const hashtag = target.hashtag.value.split(',');
@@ -43,7 +44,9 @@ Template.Body.events({
         }
 
         // Insère une note dans la Collection mongo
-        Meteor.call('notes.update', this._id, titre, text, lien, image, hashtag);
+        Meteor.call('notes.update', this._id, titre, text, descriptionLien, lien, image, hashtag);
+
+        sAlert.success('La note a été modifiée avec succès', {effect: 'genie', position: 'bottom-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
     },
 });
 
@@ -57,22 +60,33 @@ Template.Add.events({
 
         const titre = target.titre.value;
         const text = target.text.value;
+        const descriptionLien = target.descriptionLien.value;
         const lien = target.lien.value;
         const image = target.image.value;
         const hashtag = target.hashtag.value.split(',');
 
         if (target.titre.value == '') {
-            sAlert.error('Veuillez entrer un titre', {effect: 'genie', position: 'top-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
+            sAlert.error('Veuillez entrer un titre', {effect: 'genie', position: 'bottom-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
             throw new Meteor.Error('Veuillez entrer un titre');
         }
 
         if (! target.titre.value == '' && target.text.value == '' && target.lien.value == '' && target.image.value == '') {
-            sAlert.error('Veuillez ajouter au moins du texte, un lien ou une image', {effect: 'genie', position: 'top-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
+            sAlert.error('Veuillez ajouter au moins du texte, un lien ou une image', {effect: 'genie', position: 'bottom-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
+            throw new Meteor.Error('Veuillez ajouter au moins du texte, un lien ou une image');
+        }
+
+        if (target.descriptionLien.value != '' && target.lien.value == '') {
+            sAlert.error('Saisissez un lien', {effect: 'genie', position: 'bottom-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
+            throw new Meteor.Error('Veuillez ajouter au moins du texte, un lien ou une image');
+        }
+
+        if (target.descriptionLien.value == '' && target.lien.value != '') {
+            sAlert.error('Saisissez une description du lien', {effect: 'genie', position: 'bottom-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
             throw new Meteor.Error('Veuillez ajouter au moins du texte, un lien ou une image');
         }
 
         // Insère une note dans la Collection mongo
-        Meteor.call('notes.insert', titre, text, lien, image, hashtag);
+        Meteor.call('notes.insert', titre, text, descriptionLien, lien, image, hashtag);
 
         // Vide les champs du formulaire
         target.titre.value = '';
@@ -81,7 +95,7 @@ Template.Add.events({
         target.image.value = '';
         target.hashtag.value = '';
 
-        sAlert.success('La note a été enregistrée avec succès', {effect: 'genie', position: 'top-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
+        sAlert.success('La note a été enregistrée avec succès', {effect: 'genie', position: 'bottom-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
     },
 });
 
@@ -194,21 +208,24 @@ Template.Search.onCreated( () => {
 
             const titre = target.titre.value;
             const text = target.text.value;
+            const descriptionLien = target.descriptionLien.value;
             const lien = target.lien.value;
             const image = target.image.value;
             const hashtag = target.hashtag.value.split(',');
 
             if (target.titre.value == '') {
-                sAlert.error('Veuillez entrer un titre', {effect: 'genie', position: 'top-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
+                sAlert.error('Veuillez entrer un titre', {effect: 'genie', position: 'bottom-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
                 throw new Meteor.Error('Veuillez entrer un titre');
             }
 
             if (! target.titre.value == '' && target.text.value == '' && target.lien.value == '' && target.image.value == '') {
-                sAlert.error('Veuillez ajouter au moins du texte, un lien ou une image', {effect: 'genie', position: 'top-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
+                sAlert.error('Veuillez ajouter au moins du texte, un lien ou une image', {effect: 'genie', position: 'bottom-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
                 throw new Meteor.Error('Veuillez ajouter au moins du texte, un lien ou une image');
             }
 
             // Insère une note dans la Collection mongo
-            Meteor.call('notes.update', this._id, titre, text, lien, image, hashtag);
+            Meteor.call('notes.update', this._id, titre, text, descriptionLien, lien, image, hashtag);
+
+            sAlert.success('La note a été modifiée avec succès', {effect: 'genie', position: 'bottom-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
         },
     })

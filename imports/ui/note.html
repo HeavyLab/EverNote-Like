@@ -10,7 +10,7 @@
         <div id="collapse{{_id}}" class="panel-collapse collapse">
             <div class="panel-body">
                 {{text}} <br /><br />
-                <a href="{{lien}}">{{lien}}</a> <br  /><br />
+                {{descriptionLien}}: <a href="{{lien}}">{{lien}}</a> <br  /><br />
                 <a href="#" class="thumbnail">
                     <img src="{{image}}" alt="{{image}}" />
                 </a>
@@ -30,6 +30,12 @@
                         <label for="texte" class="col-sm-2 control-label">Texte</label>
                         <div class="col-sm-10">
                             <textarea class="form-control" style="resize:none;" type="text" name="text" id="text" placeholder="Texte" rows="3" value="{{text}}"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="descrLien" class="col-sm-2 control-label">Description du lien</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" name="descriptionLien" id="descriptionLien" placeholder="Description du lien" value="{{descriptionLien}}">
                         </div>
                     </div>
                     <div class="form-group">

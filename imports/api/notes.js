@@ -5,7 +5,7 @@ import { check } from 'meteor/check';
 export const Notes = new Mongo.Collection('notes');
 
 if (Meteor.isServer) {
-    Notes._ensureIndex( { titre: 1, text: 1, lien: 1, image: 1, hashtag: 1, createdAt: 1, owner: 1, username: 1 } );
+    Notes._ensureIndex( { titre: 1, text: 1, descriptionLien: 1, lien: 1, image: 1, hashtag: 1, createdAt: 1, owner: 1, username: 1 } );
 
     Meteor.publish('notes', function notesPublication() {
         return Notes.find({
@@ -21,9 +21,10 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-    'notes.insert'(titre, text, lien, image, hashtag) {
+    'notes.insert'(titre, text, descriptionLien, lien, image, hashtag) {
         check(titre, String);
         check(text, String);
+        check(descriptionLien, String);
         check(lien, String);
         check(image, String);
         check(hashtag, [String]);
@@ -39,6 +40,7 @@ Meteor.methods({
             {
                 titre,
                 text,
+                descriptionLien,
                 lien,
                 image,
                 hashtag,
@@ -53,10 +55,11 @@ Meteor.methods({
             Notes.remove(noteId);
         },
 
-        'notes.update'(noteId, titre, text, lien, image, hashtag) {
+        'notes.update'(noteId, titre, text, descriptionLien, lien, image, hashtag) {
             check(noteId, String);
             check(titre, String);
             check(text, String);
+            check(descriptionLien, String);
             check(lien, String);
             check(image, String);
             check(hashtag, [String]);
@@ -70,6 +73,7 @@ Meteor.methods({
                 {$set:
                     {'titre':titre,
                     'text':text,
+                    'descriptionLien': descriptionLien,
                     'lien':lien,
                     'image':image,
                     'hashtag': hashtag}

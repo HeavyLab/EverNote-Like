@@ -12,5 +12,6 @@ Template.Note.helpers({
 Template.Note.events({
     'click .delete'() {
         Meteor.call('notes.remove', this._id);
+        sAlert.success('La note a été supprimée avec succès', {effect: 'genie', position: 'bottom-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
     },
 });
