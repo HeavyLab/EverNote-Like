@@ -94,6 +94,7 @@ Template.Add.events({
         target.lien.value = '';
         target.image.value = '';
         target.hashtag.value = '';
+        target.descriptionLien.value = '';
 
         sAlert.success('La note a été enregistrée avec succès', {effect: 'genie', position: 'bottom-right', timeout: 5000, onRouteClose: false, stack: true, offset: '100px'});
     },
