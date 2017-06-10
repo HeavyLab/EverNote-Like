@@ -57,3 +57,10 @@ Javascript est un langage qui prend de plus en plus d'ampleur avec le développe
 #### server
 
 - **main.js** : import du fichier de DAO présent dans client/main.js, afin que le server puisse faire les recherches dans la base de données et communiquer les résultats directement aux templates concernés
+
+
+
+### Format de date
+
+- Le format de date à saisir lors de la recherche par date est le suivant : MM.DD.YYYY
+- Lors de la recherche entre deux dates, le format est le suivant : MM.DD.YYYY-MM.DD.YYYY
