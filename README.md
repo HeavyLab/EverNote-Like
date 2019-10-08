@@ -5,7 +5,7 @@ Projet réalisé avec Meteor : https://www.meteor.com/
 
 ### Pourquoi l'utilisation de Meteor:
 
-Javascript est un langage qui prend de plus en plus d'ampleur avec le développement de puissant framework tels que Angular, React ou Meteor. Bien que Meteor n'est pas aussi répandu qu'Angular ou React, c'est un langage sur lequel nous avions déjà travaillé lors d'un projet personnel, nous nous sommes donc tous naturellement vers celui ci puisque nous avions déjà quelques connaissances et que nous voulions les approfondir.
+Javascript est un langage qui prend de plus en plus d'ampleur avec le développement de puissant framework tels que Angular, React ou Meteor. Bien que Meteor ne soit pas aussi répandu qu'Angular ou React, c'est un langage sur lequel nous avions déjà travaillé lors d'un projet personnel, nous nous sommes donc tous naturellement vers celui ci puisque nous avions déjà quelques connaissances et que nous voulions les approfondir.
 
 
 ### Installer le projet:
@@ -20,7 +20,7 @@ Javascript est un langage qui prend de plus en plus d'ampleur avec le développe
   meteor npm install
   ```
   
-3. il faut ensuite d'entrer la commande suivante afin de lancer le projet, puis se rendre ensuite sur la page http://localhost:3000/:
+3. il suffit ensuite d'entrer la commande suivante afin de lancer le projet, puis se rendre ensuite sur la page http://localhost:3000/:
   ```
   meteor
   ```
